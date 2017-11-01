@@ -7,22 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="file://$MODULE_DIR$" />
-          <root url="jar://$MODULE_DIR$/weka.jar!/" />
-          <root url="jar://$MODULE_DIR$/weka-src.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://$MODULE_DIR$" />
-          <root url="jar://$MODULE_DIR$/weka-src.jar!/src/main/java" />
-          <root url="jar://$MODULE_DIR$/weka-src.jar!/src/test/java" />
-        </SOURCES>
-        <jarDirectory url="file://$MODULE_DIR$" recursive="false" />
-        <jarDirectory url="file://$MODULE_DIR$" recursive="false" type="SOURCES" />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" name="mysql-connector-java-5.0.8-bin" level="project" />
+    <orderEntry type="library" name="weka" level="project" />
   </component>
 </module>
