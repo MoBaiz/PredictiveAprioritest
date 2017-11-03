@@ -15,40 +15,35 @@ import java.util.ArrayList;
 public class main {
     public static void main(String args[]) throws Exception {
         DB db=new DB("jdbc:mysql://localhost:3306/eye","root","zch123");
-        String sql="select * from nomogram where eye=1";
-        Instances allitems=db.getData(sql);
-        Instances items=db.getData(sql);
-        //删除无用属性_14
-        for(int i=18;i<42;i++){
-            items.deleteAttributeAt(items.numAttributes()-1);
-        }
-        items.deleteAttributeAt(5);
-        items.deleteAttributeAt(4);//sex
-        items.deleteAttributeAt(2);
-        items.deleteAttributeAt(1);
-        items.deleteAttributeAt(0);
+//        String sql="select * from nomogram where eye=1";
+//        Instances allitems=db.getData(sql);
+//        Instances items=db.getData(sql);
+//        //删除无用属性_14
+//        for(int i=18;i<42;i++){
+//            items.deleteAttributeAt(items.numAttributes()-1);
+//        }
+//        items.deleteAttributeAt(5);
+//        items.deleteAttributeAt(4);//sex
+//        items.deleteAttributeAt(2);
+//        items.deleteAttributeAt(1);
+//        items.deleteAttributeAt(0);
 //        //医生选择的_去sex
 //          Instances allitems=db.getData("select * from nomogram where eye=0");
 //          Instances items=db.getData("select Age,SD,CD from nomogram where eye=0");
 
-//        //所有老数据
-//        Instances allitems=db.getData("select * from old where eye='OS'");
-//        Instances items=db.getData("select * from old where eye='OS'");
-//        items.deleteAttributeAt(items.numAttributes()-1);
-//        items.deleteAttributeAt(7);
-//        items.deleteAttributeAt(6);
-//        items.deleteAttributeAt(5);
-//        items.deleteAttributeAt(4);//删除sex
-//        items.deleteAttributeAt(3);
-//        items.deleteAttributeAt(1);
-//        items.deleteAttributeAt(0);
+        //所有老数据
+        String sql="select * from old where eye='OS'";
+        Instances allitems=db.getData(sql);
+        Instances items=db.getData(sql);
+        int[] delectpots={7,6,5,4,3,1,0};
+        items.deleteAttributeAt(items.numAttributes()-1); //nomogram
         //属性归一化
         Normalize normalize = new Normalize();
         normalize.setInputFormat(items);
         items= Filter.useFilter(items, normalize);
 
         ArrayList<Pair<Instance,Pair<Instance,Double>>> list=new ArrayList<>();
-        //计算距离bing保存到output_string中
+        //计算距离保存到output_string中
         StringBuffer output_string=new StringBuffer();
         String title="";
         for(int i=0;i<allitems.numAttributes();i++) {
@@ -74,10 +69,12 @@ public class main {
         //文件输出
         //File file1 = new File("E:\\右眼_老数据_all_去性别.csv");
        // File file1 = new File("E:\\左眼_老数据_all_去性别.csv");
-       //   File file1 = new File("E:\\左眼_新数据_医生_去性别.csv");
-       // File file1 = new File("E:\\右眼_新数据_医生_去性别.csv");
-      //  File file1 = new File("E:\\右眼_新数据_14_去性别.csv");
-        File file1 = new File("E:\\左眼_新数据_14_去性别.csv");
+
+          File file1 = new File("E:\\左眼_老数据_14_去性别.csv");
+        // File file1 = new File("E:\\左眼_新数据_医生_去性别.csv");
+        // File file1 = new File("E:\\右眼_新数据_医生_去性别.csv");
+        // File file1 = new File("E:\\右眼_新数据_14_去性别.csv");
+       //  File file1 = new File("E:\\左眼_新数据_14_去性别.csv");
         BufferedWriter bw = new BufferedWriter(new FileWriter(file1));
         bw.write(output_string.toString());
         bw.close();
